@@ -23,10 +23,16 @@ SECTIONS
 	}
 
 	/*
-	 * End of bytes actually present in tuxberry.bin.
-	 * The zImage header uses this symbol.
+	 * Real bytes at the end of the image.
+	 *
+	 * This prevents objcopy from ending the raw binary before
+	 * the address advertised by the zImage header.
 	 */
-	. = ALIGN(4);
+	.image_tail : ALIGN(4)
+	{
+		LONG(0x31584254) /* "TBX1" */
+	}
+
 	_image_end = .;
 
 	.bss (NOLOAD) : ALIGN(4)

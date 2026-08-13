@@ -30,6 +30,9 @@ $(BUILD)/start.o: arch/arm/start.S | $(BUILD)
 $(BUILD)/main.o: core/main.c include/tuxberry.h | $(BUILD)
 	$(CC) $(CFLAGS) -c $< -o $@
 
+$(BUILD)/fdt.o: core/fdt.c include/tuxberry.h | $(BUILD)
+	$(CC) $(CFLAGS) -c $< -o $@
+
 $(BUILD)/console.o: core/console.c include/tuxberry.h | $(BUILD)
 	$(CC) $(CFLAGS) -c $< -o $@
 
@@ -37,11 +40,13 @@ $(BUILD)/tuxberry.elf: \
 	$(BUILD)/start.o \
 	$(BUILD)/main.o \
 	$(BUILD)/console.o \
+	$(BUILD)/fdt.o \
 	linker.ld
 	$(LD) -T linker.ld -o $@ \
 		$(BUILD)/start.o \
 		$(BUILD)/main.o \
-		$(BUILD)/console.o
+		$(BUILD)/console.o \
+		$(BUILD)/fdt.o
 
 $(BUILD)/tuxberry.bin: $(BUILD)/tuxberry.elf
 	$(OBJCOPY) -O binary $< $@
