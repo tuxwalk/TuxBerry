@@ -19,6 +19,16 @@ CFLAGS := \
 	-Wextra \
 	-Iinclude
 
+OBJS := \
+	$(BUILD)/start.o \
+	$(BUILD)/main.o \
+	$(BUILD)/console.o \
+	$(BUILD)/fdt.o \
+	$(BUILD)/menu.o \
+	$(BUILD)/platform.o \
+	$(BUILD)/sdhci.o \
+	$(BUILD)/input.o
+
 all: $(BUILD)/tuxberry.bin
 
 $(BUILD):
@@ -30,28 +40,34 @@ $(BUILD)/start.o: arch/arm/start.S | $(BUILD)
 $(BUILD)/main.o: core/main.c include/tuxberry.h | $(BUILD)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(BUILD)/fdt.o: core/fdt.c include/tuxberry.h | $(BUILD)
-	$(CC) $(CFLAGS) -c $< -o $@
-
 $(BUILD)/console.o: core/console.c include/tuxberry.h | $(BUILD)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(BUILD)/tuxberry.elf: \
-	$(BUILD)/start.o \
-	$(BUILD)/main.o \
-	$(BUILD)/console.o \
-	$(BUILD)/fdt.o \
-	linker.ld
-	$(LD) -T linker.ld -o $@ \
-		$(BUILD)/start.o \
-		$(BUILD)/main.o \
-		$(BUILD)/console.o \
-		$(BUILD)/fdt.o
+$(BUILD)/fdt.o: core/fdt.c include/tuxberry.h | $(BUILD)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(BUILD)/menu.o: core/menu.c include/tuxberry.h | $(BUILD)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(BUILD)/platform.o: platform/msm8916/platform.c include/tuxberry.h | $(BUILD)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(BUILD)/sdhci.o: platform/msm8916/sdhci.c include/tuxberry.h | $(BUILD)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(BUILD)/input.o: device/gt58wifi/input.c include/tuxberry.h | $(BUILD)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(BUILD)/tuxberry.elf: $(OBJS) linker.ld
+	$(LD) -T linker.ld -o $@ $(OBJS)
 
 $(BUILD)/tuxberry.bin: $(BUILD)/tuxberry.elf
 	$(OBJCOPY) -O binary $< $@
 
+package: all
+	./scripts/package-gt58wifi.sh
+
 clean:
 	rm -rf $(BUILD)
 
-.PHONY: all clean
+.PHONY: all package clean
