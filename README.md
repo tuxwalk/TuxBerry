@@ -13,6 +13,7 @@ Current functionality includes:
 - Storage testing
 - Low level platform beta
 - Device bring up tools
+- Kernel boot up
 
 ## License
 
