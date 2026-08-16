@@ -1,17 +1,9 @@
 # TuxBerry
 
-TuxBerry is a small experimental diagnostic tool for low level ARM hardware.
-
-It currently provides a simple environment for testing hardware, storage, and platform functionality during early device bring up.
-
+TuxBerry is a second stage bootloader intended for the TuxForge, meant to replace lk2nd due to limited support to many devices
 ## Current Status
 
-TuxBerry is currently in early development and primarily serves as a diagnostic and hardware testing tool.
-
-## Goal
-
-Goal is to turn TuxBerry into a lightweight second stage bootloader capable of loading and booting TuxForge on supported devices.
-
+TuxBerry is currently has released its first version for one device, but will get more device support. 
 ## Features
 
 Current functionality includes:
@@ -21,10 +13,6 @@ Current functionality includes:
 - Storage testing
 - Low level platform beta
 - Device bring up tools
-
-## Warning
-
-TuxBerry is experimental low level software. Use it only on devices where you have a working recovery method.
 
 ## License
 
