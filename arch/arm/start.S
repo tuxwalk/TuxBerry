@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: MIT */
 .syntax unified
 .cpu cortex-a53
 .arm

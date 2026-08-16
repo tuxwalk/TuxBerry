@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MIT -->
+
 # TuxBerry
 
 TuxBerry is a second stage bootloader intended for the TuxForge, meant to replace lk2nd due to limited support to many devices
