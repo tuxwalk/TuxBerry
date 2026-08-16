@@ -3,7 +3,7 @@
 
 # TuxBerry
 
-TuxBerry is a second stage bootloader intended for the TuxForge, meant to replace lk2nd due to limited support to many devices
+TuxBerry is a second stage bootloader intended for TuxForge, focused on lightweight hardware diagnostics, device bring up, and booting Linux on supported hardware
 ## Current Status
 
 TuxBerry is currently has released its first version for one device, but will get more device support. 

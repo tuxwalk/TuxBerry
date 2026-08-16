@@ -28,7 +28,7 @@ _image_start:
 
 _start:
 	/*
-	 * lk2nd passes:
+	 * Entry arguments:
 	 * r0 = 0
 	 * r1 = machine type
 	 * r2 = DTB
