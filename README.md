@@ -1,3 +1,4 @@
+<!-- SPDX-FileCopyrightText: 2026 Artem Novak -->
 <!-- SPDX-License-Identifier: MIT -->
 
 # TuxBerry

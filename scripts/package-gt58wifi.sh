@@ -1,4 +1,5 @@
 #!/bin/sh
+# SPDX-FileCopyrightText: 2026 Artem Novak
 # SPDX-License-Identifier: MIT
 set -eu
 
