@@ -265,22 +265,24 @@ static void show_penguinberry(void)
 "\n");
 }
 
-static void show_linux(void)
+static void show_linux(void *dtb, uint32_t machtype)
 {
-	console_clear();
+        console_clear();
 
-	console_puts("BOOT LINUX\n");
-	console_puts("------------------------------\n\n");
+        console_puts("BOOT LINUX\n");
+        console_puts("------------------------------\n\n");
 
-	show_penguinberry();
+        show_penguinberry();
 
-	console_puts("NOT IMPLEMENTED YET\n");
-	console_puts("TARGET V0.4\n");
+        console_puts("TUXBERRY V0.4-DEV\n\n");
 
-	wait_return();
+        if (!tb_boot_linux(dtb, machtype)) {
+                console_puts("\nBOOT FAILED\n");
+                wait_return();
+        }
 }
 
-void menu_run(void *dtb, const struct tb_simplefb *fb)
+void menu_run(void *dtb, const struct tb_simplefb *fb, uint32_t machtype)
 {
 	unsigned selected = 0;
 
@@ -321,7 +323,7 @@ void menu_run(void *dtb, const struct tb_simplefb *fb)
 			break;
 
 		case 4:
-			show_linux();
+			show_linux(dtb, machtype);
 			break;
 
 		case 5:

@@ -82,8 +82,11 @@ void platform_reboot(void);
 /* Device input */
 enum tb_key input_wait(void);
 
+/* Linux boot */
+int tb_boot_linux(void *dtb, uint32_t machtype);
+
 /* UI */
-void menu_run(void *dtb, const struct tb_simplefb *fb);
+void menu_run(void *dtb, const struct tb_simplefb *fb, uint32_t machtype);
 
 /* Entry */
 void tuxberry_main(uint32_t r0, uint32_t machtype, void *dtb);

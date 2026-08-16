@@ -11,7 +11,6 @@ void tuxberry_main(uint32_t r0, uint32_t machtype, void *dtb)
 	struct tb_simplefb fb;
 
 	(void)r0;
-	(void)machtype;
 
 	if (!fdt_valid(dtb))
 		halt();
@@ -32,7 +31,7 @@ void tuxberry_main(uint32_t r0, uint32_t machtype, void *dtb)
 	/*
 	 * Interactive bootloader UI.
 	 */
-	menu_run(dtb, &fb);
+	menu_run(dtb, &fb, machtype);
 
 	halt();
 }

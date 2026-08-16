@@ -21,7 +21,7 @@ if [ ! -f /tmp/t350-working/ramdisk ]; then
 
 	rm -rf /tmp/t350-working
 
-	python3 "$LINUX_DIR/android-mkbootimg/unpack_bootimg.py" \
+	/usr/bin/unpack_bootimg \
 		--boot_img "$LINUX_DIR/boot-initramfs5.img" \
 		--out /tmp/t350-working
 fi
@@ -51,7 +51,7 @@ print(f"DTB:      {len(dtb):#x}")
 print(f"Final:    {len(tb + dtb):#x}")
 PY
 
-python3 "$LINUX_DIR/android-mkbootimg/mkbootimg.py" \
+/usr/bin/mkbootimg \
 	--kernel "$ROOT/build/tuxberry-zImage-dtb" \
 	--ramdisk /tmp/t350-working/ramdisk \
 	--base 0x80000000 \

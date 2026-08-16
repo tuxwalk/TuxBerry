@@ -25,6 +25,8 @@ OBJS := \
 	$(BUILD)/console.o \
 	$(BUILD)/fdt.o \
 	$(BUILD)/menu.o \
+	$(BUILD)/boot.o \
+	$(BUILD)/gt58wifi-zImage.o \
 	$(BUILD)/platform.o \
 	$(BUILD)/sdhci.o \
 	$(BUILD)/input.o
@@ -48,6 +50,14 @@ $(BUILD)/fdt.o: core/fdt.c include/tuxberry.h | $(BUILD)
 
 $(BUILD)/menu.o: core/menu.c include/tuxberry.h | $(BUILD)
 	$(CC) $(CFLAGS) -c $< -o $@
+
+$(BUILD)/boot.o: core/boot.c include/tuxberry.h | $(BUILD)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(BUILD)/gt58wifi-zImage.o: payload/gt58wifi-zImage | $(BUILD)
+	$(OBJCOPY) -I binary -O elf32-littlearm -B arm \
+		--rename-section .data=.rodata.payload,alloc,load,readonly,data,contents \
+		$< $@
 
 $(BUILD)/platform.o: platform/msm8916/platform.c include/tuxberry.h | $(BUILD)
 	$(CC) $(CFLAGS) -c $< -o $@
